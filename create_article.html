@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Artikel Baru</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Buat Artikel Baru</h1>
+    </header>
+
+    <main>
+        <form id="article-form">
+            <label for="title">Judul Artikel:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="content">Isi Artikel:</label>
+            <textarea id="content" name="content" rows="10" required></textarea>
+            <button type="submit">Upload Artikel</button>
+        </form>
+    </main>
+
+    <script>
+        // Handle article form submission
+        const articleForm = document.getElementById('article-form');
+        articleForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            
+            if (title && content) {
+                // Retrieve existing articles or initialize an empty array
+                let articles = JSON.parse(localStorage.getItem('articles')) || [];
+                
+                // Create a new article object
+                const newArticle = {
+                    title: title,
+                    content: content
+                };
+                
+                // Add the new article to the list
+                articles.push(newArticle);
+                
+                // Save updated articles to localStorage
+                localStorage.setItem('articles', JSON.stringify(articles));
+                
+                // Redirect to the artikel page
+                window.location.href = "artikel.html";
+            }
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Maju Terus Indonesia Ku. Semua Hak Dilindungi.</p>
+    </footer>
+</body>
+</html>
